@@ -1,0 +1,47 @@
+body {
+  font-family: 'Source Code Pro';
+  color: #111;
+  background-color: #eee;
+}
+
+pre {
+  color: #eee;
+  background-color: #111;
+  padding: 1rem;
+  overflow-y: scroll;
+}
+
+a {
+  color: #111;
+}
+
+.break {
+  height: 5rem;
+}
+
+footer, header {
+  background: #111;
+  color: #eee;
+}
+
+header {
+  padding-bottom: 25vh;
+  margin-bottom: -25vh;
+  /*background-image: url('assets/patterns/wood_1.png');*/
+  background: #111;
+  text-align: center;
+}
+
+main * {
+  font-weight: 300;
+}
+
+main .main {
+  background-color: #eee;
+}
+
+img {
+  display: block;
+}
+
+
