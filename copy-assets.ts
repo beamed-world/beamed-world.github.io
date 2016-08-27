@@ -59,10 +59,6 @@ function assetChanged(sourcePath: string, destinationPath: string): boolean {
   const destinationFile = r(destinationPath)
   const destinationHash = h(destinationFile)
 
-  if (!(destinationHash === sourceHash)) {
-    console.log(destinationFile)
-  }
-
-  return true
+  return !(destinationHash === sourceHash)
 
 }
