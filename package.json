@@ -13,6 +13,7 @@
   "author": "Edward Lombe <edward.lombe@mycosystems.com.au> (https://github.com/Edward-Lombe)",
   "license": "ISC",
   "dependencies": {
+    "elm": "0.17.1",
     "flexboxgrid": "6.3.1",
     "mkdirp": "0.5.1",
     "normalize.css": "4.2.0",
