@@ -1,5 +1,6 @@
 {
   "globalDependencies": {
+    "elm": "registry:dt/elm#0.12.0+20160316155526",
     "node": "registry:dt/node#6.0.0+20160823142437"
   },
   "dependencies": {
