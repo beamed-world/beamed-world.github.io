@@ -1,5 +1,11 @@
 # Lorem ipsum
 
+<!--{{{
+  "title" : "Lorem Ipsum",
+  "date" : "2016-08-29T03:04:21.983Z",
+  "byline": "Why Lorem Ipsum still hasn't gone out of fashion"
+}}}-->
+
 Ad munere nostrud comprehensam eos. Vis cu idque vitae iudicabit. Ut iusto
 libris posidonium usu, duo ne hinc maiorum. Probatus scribentur ea mel, vel
 dolores salutandi te! Ridens repudiare forensibus ex sit! Mel mundi doctus

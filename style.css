@@ -25,11 +25,16 @@ footer, header {
 }
 
 header {
-  padding-bottom: 25vh;
-  margin-bottom: -25vh;
+  /*padding-bottom: 25vh;
+  margin-bottom: -25vh;*/
   background: #111;
+  padding: 0.5rem 0 0.5rem 0;
   /*text-align: center;*/
   /*height: 100vh;*/
+}
+
+header h3 {
+  font-weight: 200;
 }
 
 main * {
@@ -45,8 +50,6 @@ img {
 }
 
 @media only screen and (max-width: 75em) {
-
-  
 
 }
 @media only screen and (max-width: 62em) {
