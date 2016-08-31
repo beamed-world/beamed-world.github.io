@@ -16,6 +16,7 @@ type alias Meta =
     { title : String
     , data : String
     , byline : String
+    , preview : String
     }
 
 main = text (toString (Json.decodeString myDecoder dataJson))
@@ -26,10 +27,11 @@ myDecoder =
     Json.object1 identity
         ("posts" := Json.list (
             Json.object2 Post
-                ("meta" := Json.object3 Meta
+                ("meta" := Json.object4 Meta
                     ("title" := Json.string)
                     ("date" := Json.string)
                     ("byline" := Json.string)
+                    ("preview" := Json.string)
                 )
                 ("content" := Json.string)
         ))

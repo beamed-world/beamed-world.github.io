@@ -24,6 +24,7 @@ type alias Meta =
     { title : String
     , date : String
     , byline : String
+    , preview : String
     }
 
 
@@ -62,10 +63,11 @@ dataDecoder =
     Json.object1 identity
         ("posts" := Json.list (
             Json.object2 Post
-                ("meta" := Json.object3 Meta
+                ("meta" := Json.object4 Meta
                     ("title" := Json.string)
                     ("date" := Json.string)
                     ("byline" := Json.string)
+                    ("preview" := Json.string)
                 )
                 ("content" := Json.string)
         ))
@@ -141,7 +143,7 @@ postSection post =
             {= post.meta.date}
         </small>
         <p>
-            {Markdown.toHtml [] post.content}
+            {= post.meta.preview}
         </p>
         <br>
         <a href="#">Read more</a>

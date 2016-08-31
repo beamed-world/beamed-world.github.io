@@ -8955,11 +8955,7 @@ var _user$project$Main$postSection = function (post) {
 					[]),
 				_elm_lang$core$Native_List.fromArray(
 					[
-						A2(
-						_evancz$elm_markdown$Markdown$toHtml,
-						_elm_lang$core$Native_List.fromArray(
-							[]),
-						post.content)
+						_elm_lang$html$Html$text(post.meta.preview)
 					])),
 				A2(
 				_elm_lang$html$Html$br,
@@ -9146,9 +9142,9 @@ var _user$project$Main$Post = F2(
 	function (a, b) {
 		return {meta: a, content: b};
 	});
-var _user$project$Main$Meta = F3(
-	function (a, b, c) {
-		return {title: a, date: b, byline: c};
+var _user$project$Main$Meta = F4(
+	function (a, b, c, d) {
+		return {title: a, date: b, byline: c, preview: d};
 	});
 var _user$project$Main$dataDecoder = A2(
 	_elm_lang$core$Json_Decode$object1,
@@ -9163,12 +9159,13 @@ var _user$project$Main$dataDecoder = A2(
 				A2(
 					_elm_lang$core$Json_Decode_ops[':='],
 					'meta',
-					A4(
-						_elm_lang$core$Json_Decode$object3,
+					A5(
+						_elm_lang$core$Json_Decode$object4,
 						_user$project$Main$Meta,
 						A2(_elm_lang$core$Json_Decode_ops[':='], 'title', _elm_lang$core$Json_Decode$string),
 						A2(_elm_lang$core$Json_Decode_ops[':='], 'date', _elm_lang$core$Json_Decode$string),
-						A2(_elm_lang$core$Json_Decode_ops[':='], 'byline', _elm_lang$core$Json_Decode$string))),
+						A2(_elm_lang$core$Json_Decode_ops[':='], 'byline', _elm_lang$core$Json_Decode$string),
+						A2(_elm_lang$core$Json_Decode_ops[':='], 'preview', _elm_lang$core$Json_Decode$string))),
 				A2(_elm_lang$core$Json_Decode_ops[':='], 'content', _elm_lang$core$Json_Decode$string)))));
 var _user$project$Main$getData = A2(_evancz$elm_http$Http$get, _user$project$Main$dataDecoder, '/data.json');
 var _user$project$Main$Model = function (a) {

@@ -3,7 +3,8 @@
 <!--{{{
   "title" : "Elmx",
   "date" : "2016-08-29T03:04:21.983Z",
-  "byline": "React has come to the Elm language"
+  "byline": "React has come to the Elm language",
+  "preview": "Elmx is a pre compiler for the Elm programming language. If you don't know about Elm, do some reading first, because Elmx targets an edge case, and knowing the mapping between a conventional Elm virtual DOM call and one set up with Elmx is critical."
 }}}-->
 
 Elmx is a pre compiler for the Elm programming language. If you don't know about

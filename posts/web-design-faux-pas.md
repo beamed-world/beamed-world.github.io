@@ -3,7 +3,8 @@
 <!--{{{
   "title" : "Universal visualizer",
   "date" : "2016-08-29T03:04:21.983Z",
-  "byline": "93 bilion lightyears, nearly 14 billion years, someone has to do something"
+  "byline": "93 bilion lightyears, nearly 14 billion years, someone has to do something",
+  "preview": "The web as we know it today is a strange and wonderful place. It has become the universal format for all electronicly enabled media, and nothing comes close to it in terms of adoption, support and general ubiquity."
 }}}-->
 
 The web as we know it today is a strange and wonderful place. It has become the

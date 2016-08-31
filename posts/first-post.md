@@ -3,7 +3,8 @@
 <!--{{{
   "title" : "Lorem Ipsum",
   "date" : "2016-08-29T03:04:21.983Z",
-  "byline": "Why Lorem Ipsum still hasn't gone out of fashion"
+  "byline": "Why Lorem Ipsum still hasn't gone out of fashion",
+  "preview": "Ad munere nostrud comprehensam eos. Vis cu idque vitae iudicabit. Ut iusto libris posidonium usu, duo ne hinc maiorum. Probatus scribentur ea mel, vel"
 }}}-->
 
 Ad munere nostrud comprehensam eos. Vis cu idque vitae iudicabit. Ut iusto
