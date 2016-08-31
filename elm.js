@@ -8861,63 +8861,6 @@ var _user$project$Main$footerSection = A2(
 						]))
 				]))
 		]));
-var _user$project$Main$articlePreview = function (title) {
-	return A2(
-		_elm_lang$html$Html$article,
-		_elm_lang$core$Native_List.fromArray(
-			[]),
-		_elm_lang$core$Native_List.fromArray(
-			[
-				A2(
-				_elm_lang$html$Html$h2,
-				_elm_lang$core$Native_List.fromArray(
-					[]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text(title)
-					])),
-				A2(
-				_elm_lang$html$Html$h3,
-				_elm_lang$core$Native_List.fromArray(
-					[]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text('Some sort of byline that describes more')
-					])),
-				A2(
-				_elm_lang$html$Html$small,
-				_elm_lang$core$Native_List.fromArray(
-					[]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text('\n            5 days ago @ 2016-10-03 14:40:45\n        ')
-					])),
-				A2(
-				_elm_lang$html$Html$p,
-				_elm_lang$core$Native_List.fromArray(
-					[]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text('\n            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna\n            aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper ...\n        ')
-					])),
-				A2(
-				_elm_lang$html$Html$br,
-				_elm_lang$core$Native_List.fromArray(
-					[]),
-				_elm_lang$core$Native_List.fromArray(
-					[])),
-				A2(
-				_elm_lang$html$Html$a,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						A2(_elm_lang$html$Html_Attributes$attribute, 'href', '#')
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text('Read more')
-					]))
-			]));
-};
 var _user$project$Main$postSection = function (post) {
 	return A2(
 		_elm_lang$html$Html$article,
@@ -8976,21 +8919,19 @@ var _user$project$Main$postSection = function (post) {
 			]));
 };
 var _user$project$Main$mainSection = function (model) {
-	var article3 = _user$project$Main$articlePreview('Title 3');
-	var article2 = _user$project$Main$articlePreview('Title 2');
-	var article1 = _user$project$Main$articlePreview('Title 1');
-	var articles = A2(_elm_lang$core$List$map, _user$project$Main$postSection, model.posts);
-	return A2(
-		_elm_lang$html$Html$main$,
+	var splash = A2(
+		_elm_lang$html$Html$div,
 		_elm_lang$core$Native_List.fromArray(
-			[]),
+			[
+				A2(_elm_lang$html$Html_Attributes$attribute, 'class', 'container-fluid')
+			]),
 		_elm_lang$core$Native_List.fromArray(
 			[
 				A2(
 				_elm_lang$html$Html$div,
 				_elm_lang$core$Native_List.fromArray(
 					[
-						A2(_elm_lang$html$Html_Attributes$attribute, 'class', 'container-fluid')
+						A2(_elm_lang$html$Html_Attributes$attribute, 'class', 'row')
 					]),
 				_elm_lang$core$Native_List.fromArray(
 					[
@@ -8998,39 +8939,39 @@ var _user$project$Main$mainSection = function (model) {
 						_elm_lang$html$Html$div,
 						_elm_lang$core$Native_List.fromArray(
 							[
-								A2(_elm_lang$html$Html_Attributes$attribute, 'class', 'row')
+								A2(_elm_lang$html$Html_Attributes$attribute, 'class', _user$project$Main$containerClass)
 							]),
 						_elm_lang$core$Native_List.fromArray(
 							[
 								A2(
-								_elm_lang$html$Html$div,
+								_elm_lang$html$Html$h1,
+								_elm_lang$core$Native_List.fromArray(
+									[]),
 								_elm_lang$core$Native_List.fromArray(
 									[
-										A2(_elm_lang$html$Html_Attributes$attribute, 'class', _user$project$Main$containerClass)
+										_elm_lang$html$Html$text('Hello')
+									])),
+								A2(
+								_elm_lang$html$Html$p,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										A2(_elm_lang$html$Html_Attributes$attribute, 'class', 'lead')
 									]),
 								_elm_lang$core$Native_List.fromArray(
 									[
-										A2(
-										_elm_lang$html$Html$h1,
-										_elm_lang$core$Native_List.fromArray(
-											[]),
-										_elm_lang$core$Native_List.fromArray(
-											[
-												_elm_lang$html$Html$text('Hello')
-											])),
-										A2(
-										_elm_lang$html$Html$p,
-										_elm_lang$core$Native_List.fromArray(
-											[
-												A2(_elm_lang$html$Html_Attributes$attribute, 'class', 'lead')
-											]),
-										_elm_lang$core$Native_List.fromArray(
-											[
-												_elm_lang$html$Html$text('Some catchy and enthusiastic line here')
-											]))
+										_elm_lang$html$Html$text('Some catchy and enthusiastic line here')
 									]))
 							]))
-					])),
+					]))
+			]));
+	var articles = A2(_elm_lang$core$List$map, _user$project$Main$postSection, model.posts);
+	return A2(
+		_elm_lang$html$Html$main$,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				splash,
 				A2(
 				_elm_lang$html$Html$div,
 				_elm_lang$core$Native_List.fromArray(
@@ -9159,9 +9100,10 @@ var _user$project$Main$dataDecoder = A2(
 						A2(_elm_lang$core$Json_Decode_ops[':='], 'preview', _elm_lang$core$Json_Decode$string))),
 				A2(_elm_lang$core$Json_Decode_ops[':='], 'content', _elm_lang$core$Json_Decode$string)))));
 var _user$project$Main$getData = A2(_evancz$elm_http$Http$get, _user$project$Main$dataDecoder, '/data.json');
-var _user$project$Main$Model = function (a) {
-	return {posts: a};
-};
+var _user$project$Main$Model = F2(
+	function (a, b) {
+		return {posts: a, selectedPost: b};
+	});
 var _user$project$Main$SetPosts = function (a) {
 	return {ctor: 'SetPosts', _0: a};
 };
@@ -9170,7 +9112,8 @@ var _user$project$Main$init = {
 	ctor: '_Tuple2',
 	_0: {
 		posts: _elm_lang$core$Native_List.fromArray(
-			[])
+			[]),
+		selectedPost: _elm_lang$core$Maybe$Nothing
 	},
 	_1: A3(
 		_elm_lang$core$Task$perform,

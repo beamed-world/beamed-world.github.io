@@ -30,6 +30,7 @@ type alias Meta =
 
 type alias Model =
     { posts : Posts
+    , selectedPost : Maybe Post
     }
 
 
@@ -49,7 +50,7 @@ main = Html.App.program
 
 init : (Model, Cmd Message)
 init =
-    ( { posts = [] }
+    ( { posts = [], selectedPost = Nothing }
     , Task.perform (always NoOp) SetPosts getData
     )
 
@@ -107,15 +108,11 @@ headerSection =
         ]
 
 
-mainSection : Model ->Html a
+mainSection : Model -> Html a
 mainSection model =
     let
         articles = List.map postSection model.posts
-        article1 = articlePreview "Title 1"
-        article2 = articlePreview "Title 2"
-        article3 = articlePreview "Title 3"
-    in
-        Html.main' [] [
+        splash =
             Html.div [Html.Attributes.attribute "class" "container-fluid"] [
                 Html.div [Html.Attributes.attribute "class" "row"] [
                     Html.div [Html.Attributes.attribute "class" (containerClass)] [
@@ -124,6 +121,9 @@ mainSection model =
                     ]
                 ]
             ]
+    in
+        Html.main' [] [
+            splash
             , Html.div [Html.Attributes.attribute "class" "container-fluid"] [
                 Html.div [Html.Attributes.attribute "class" "row"] [
                     Html.div [Html.Attributes.attribute "class" (containerClass)] ([
@@ -144,23 +144,6 @@ postSection post =
         , Html.p [] [
             Html.text  post.meta.preview
         ]
-        , Html.br [] []
-        , Html.a [Html.Attributes.attribute "href" "#"] [Html.text "Read more"]
-    ]
-
-
-articlePreview : String -> Html a
-articlePreview title =
-    Html.article [] [
-        Html.h2 [] [Html.text  title]
-        , Html.h3 [] [Html.text "Some sort of byline that describes more"]
-        , Html.small [] [Html.text "
-            5 days ago @ 2016-10-03 14:40:45
-        "]
-        , Html.p [] [Html.text "
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna
-            aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper ...
-        "]
         , Html.br [] []
         , Html.a [Html.Attributes.attribute "href" "#"] [Html.text "Read more"]
     ]

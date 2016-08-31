@@ -30,6 +30,7 @@ type alias Meta =
 
 type alias Model =
     { posts : Posts
+    , selectedPost : Maybe Post
     }
 
 
@@ -49,7 +50,7 @@ main = Html.App.program
 
 init : (Model, Cmd Message)
 init =
-    ( { posts = [] }
+    ( { posts = [], selectedPost = Nothing }
     , Task.perform (always NoOp) SetPosts getData
     )
 
@@ -107,15 +108,11 @@ headerSection =
         </header>
 
 
-mainSection : Model ->Html a
+mainSection : Model -> Html a
 mainSection model =
     let
         articles = List.map postSection model.posts
-        article1 = articlePreview "Title 1"
-        article2 = articlePreview "Title 2"
-        article3 = articlePreview "Title 3"
-    in
-        <main'>
+        splash =
             <div class="container-fluid">
                 <div class="row">
                     <div class={containerClass}>
@@ -124,6 +121,9 @@ mainSection model =
                     </div>
                 </div>
             </div>
+    in
+        <main'>
+            {splash}
             <div class="container-fluid">
                 <div class="row">
                     <div class={containerClass}>
@@ -143,23 +143,6 @@ postSection post =
         </small>
         <p>
             {= post.meta.preview}
-        </p>
-        <br>
-        <a href="#">Read more</a>
-    </article>
-
-
-articlePreview : String -> Html a
-articlePreview title =
-    <article>
-        <h2>{= title}</h2>
-        <h3>Some sort of byline that describes more</h3>
-        <small>
-            5 days ago @ 2016-10-03 14:40:45
-        </small>
-        <p>
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna
-            aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper ...
         </p>
         <br>
         <a href="#">Read more</a>
