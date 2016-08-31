@@ -1,56 +1,40 @@
-module Main exposing (..)
-
 import Html exposing (..)
-import Html.Attributes exposing (..)
+import Json.Decode as Json exposing ((:=))
+import Debug
+
+type alias Data =
+    { posts : Posts }
+
+type alias Posts = List (Post)
+
+type alias Post =
+    { meta : Meta
+    , content : String
+    }
+
+type alias Meta =
+    { title : String
+    , data : String
+    , byline : String
+    }
+
+main = text (toString (Json.decodeString myDecoder dataJson))
 
 
-main : Html a
-main =
-    header'
+myDecoder : Json.Decoder Posts
+myDecoder =
+    Json.object1 identity
+        ("posts" := Json.list (
+            Json.object2 Post
+                ("meta" := Json.object3 Meta
+                    ("title" := Json.string)
+                    ("date" := Json.string)
+                    ("byline" := Json.string)
+                )
+                ("content" := Json.string)
+        ))
 
 
-header' : Html a
-header' =
-    Html.header [] [
-        Html.br [] []
-        , Html.div [Html.Attributes.attribute "class" "container-fluid"] [
-            Html.div [Html.Attributes.attribute "class" "row"] [
-                Html.div [Html.Attributes.attribute "class" (containerClass)] [
-                    Html.div [Html.Attributes.attribute "class" "row"] [
-                        Html.div [Html.Attributes.attribute "class" "col-xs"] [
-                            Html.h3 [Html.Attributes.attribute "class" "hug"] [Html.text "Beamed World"]
-                        ]
-                    ]
-                ]
-            ]
-        ]
-        , Html.br [] []
-    ]
-
-{--
-    header []
-        [ br [] []
-        , divClass "container-fluid"
-            [ divClass "row"
-                [ divClass containerClass
-                    [ divClass "row"
-                        [ divClass "col-xs"
-                            [ h3 [ class "hug" ] [ text "Beamed World" ]
-                            ]
-                        ]
-                    ]
-                ]
-            ]
-        , br [] []
-        ]
---}
-
-
-divClass : String -> List (Html a) -> Html a
-divClass s =
-    div [ class s ]
-
-
-containerClass : String
-containerClass =
-    "col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3"
+dataJson = """
+{"posts":[{"meta":{"title":"Ebike fly wheel","date":"2016-08-29T03:04:21.983Z","byline":"Past meets future"},"content":""},{"meta":{"title":"Elmx","date":"2016-08-29T03:04:21.983Z","byline":"React has come to the Elm language"},"content":""},{"meta":{"title":"Lorem Ipsum","date":"2016-08-29T03:04:21.983Z","byline":"Why Lorem Ipsum still hasn't gone out of fashion"},"content":""},{"meta":{"title":"Markdown front matter","date":"2016-08-29T03:04:21.983Z","byline":"YAML is too easy for my human eyes"},"content":""},{"meta":{"title":"Universal visualizer","date":"2016-08-29T03:04:21.983Z","byline":"93 bilion lightyears, nearly 14 billion years, someone has to do something"},"content":""},{"meta":{"title":"Universal visualizer","date":"2016-08-29T03:04:21.983Z","byline":"93 bilion lightyears, nearly 14 billion years, someone has to do something"},"content":""}]}
+"""

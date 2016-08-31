@@ -5,22 +5,36 @@ import Html.Attributes exposing (..)
 import Html.App
 import Http
 import Markdown
+import Task
+import Json.Decode as Json exposing ((:=))
+import Debug
+import Markdown
 
+type alias Data =
+    { posts : Posts }
+
+type alias Posts = List (Post)
 
 type alias Post =
-    { title : String
+    { meta : Meta
     , content : String
+    }
+
+type alias Meta =
+    { title : String
+    , date : String
+    , byline : String
     }
 
 
 type alias Model =
-    { posts : List Post
+    { posts : Posts
     }
 
 
 type Message
     = NoOp
-    | SetPosts (List Post)
+    | SetPosts (Posts)
 
 
 main : Program Never
@@ -35,8 +49,26 @@ main = Html.App.program
 init : (Model, Cmd Message)
 init =
     ( { posts = [] }
-    , Cmd.none
+    , Task.perform (always NoOp) SetPosts getData
     )
+
+
+getData : Task.Task Http.Error Posts
+getData = Http.get dataDecoder "/data.json"
+
+
+dataDecoder : Json.Decoder Posts
+dataDecoder =
+    Json.object1 identity
+        ("posts" := Json.list (
+            Json.object2 Post
+                ("meta" := Json.object3 Meta
+                    ("title" := Json.string)
+                    ("date" := Json.string)
+                    ("byline" := Json.string)
+                )
+                ("content" := Json.string)
+        ))
 
 
 subscriptions : Model -> Sub Message
@@ -44,14 +76,21 @@ subscriptions model = Sub.none
 
 
 update : Message -> Model -> (Model, Cmd Message)
-update message model = (model, Cmd.none)
+update message model = -- (model, Cmd.none)
+    case message of
+        SetPosts posts ->
+            ( { model | posts = posts }, Cmd.none)
+
+        NoOp ->
+            (model, Cmd.none)
 
 
 view : Model -> Html message
 view model =
     div []
         [ headerSection
-        , mainSection
+        , text ("There are " ++ (toString (List.length model.posts)) ++ " posts")
+        , mainSection model
         , Html.div [Html.Attributes.attribute "class" "break"] []
         , footerSection ]
 
@@ -67,9 +106,10 @@ headerSection =
         ]
 
 
-mainSection : Html a
-mainSection =
+mainSection : Model ->Html a
+mainSection model =
     let
+        articles = List.map postSection model.posts
         article1 = articlePreview "Title 1"
         article2 = articlePreview "Title 2"
         article3 = articlePreview "Title 3"
@@ -86,11 +126,26 @@ mainSection =
             , Html.div [Html.Attributes.attribute "class" "container-fluid"] [
                 Html.div [Html.Attributes.attribute "class" "row"] [
                     Html.div [Html.Attributes.attribute "class" (containerClass)] ([
-                        ] ++  [article1, article2, article3] ++ [
+                        ] ++  articles ++ [
                     ])
                 ]
             ]
         ]
+
+postSection : Post -> Html a
+postSection post =
+    Html.article [] [
+        Html.h2 [] [Html.text  post.meta.title]
+        , Html.h3 [] [Html.text  post.meta.byline]
+        , Html.small [] [
+            Html.text  post.meta.date
+        ]
+        , Html.p [] [
+            Markdown.toHtml [] post.content
+        ]
+        , Html.br [] []
+        , Html.a [Html.Attributes.attribute "href" "#"] [Html.text "Read more"]
+    ]
 
 
 articlePreview : String -> Html a
