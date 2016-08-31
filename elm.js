@@ -9096,15 +9096,6 @@ var _user$project$Main$view = function (model) {
 		_elm_lang$core$Native_List.fromArray(
 			[
 				_user$project$Main$headerSection,
-				_elm_lang$html$Html$text(
-				A2(
-					_elm_lang$core$Basics_ops['++'],
-					'There are ',
-					A2(
-						_elm_lang$core$Basics_ops['++'],
-						_elm_lang$core$Basics$toString(
-							_elm_lang$core$List$length(model.posts)),
-						' posts'))),
 				_user$project$Main$mainSection(model),
 				A2(
 				_elm_lang$html$Html$div,
