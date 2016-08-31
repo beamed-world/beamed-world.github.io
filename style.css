@@ -37,10 +37,6 @@ header h3 {
   font-weight: 200;
 }
 
-main * {
-  font-weight: 300;
-}
-
 main .main {
   background-color: #eee;
 }
