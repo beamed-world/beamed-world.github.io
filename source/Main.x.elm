@@ -91,7 +91,6 @@ view : Model -> Html message
 view model =
     div []
         [ headerSection
-        , text ("There are " ++ (toString (List.length model.posts)) ++ " posts")
         , mainSection model
         , <div class="break"></div>
         , footerSection ]
