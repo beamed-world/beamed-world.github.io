@@ -2,6 +2,7 @@ module Main exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Html.Events
 import Html.App
 import Http
 import Markdown
@@ -36,6 +37,8 @@ type alias Model =
 
 type Message
     = NoOp
+    | DeselectPost
+    | SelectPost Post
     | SetPosts (Posts)
 
 
@@ -84,31 +87,49 @@ update message model = -- (model, Cmd.none)
         SetPosts posts ->
             ( { model | posts = posts }, Cmd.none)
 
+        SelectPost post ->
+            ( { model | selectedPost = Just post }, Cmd.none)
+
+        DeselectPost ->
+            ( { model | selectedPost = Nothing }, Cmd.none)
+
         NoOp ->
             (model, Cmd.none)
 
 
-view : Model -> Html message
+view : Model -> Html Message
 view model =
-    div []
-        [ headerSection
-        , mainSection model
-        , <div class="break"></div>
-        , footerSection ]
+    let
+        index model =
+            div []
+                [ headerSection
+                , mainSection model
+                , <div class="break"></div>
+                , footerSection ]
+        article post =
+            div []
+                [ headerSection
+                , containerWrap [(Markdown.toHtml [] post.content)]
+                , footerSection ]
 
+    in
+        case model.selectedPost of
+            Nothing -> index model
 
-headerSection : Html a
+            Just post -> article post
+
+headerSection : Html Message
 headerSection =
     let
         heading =
-            <h3 class="hug">Beamed World</h3>
+            <h3 onClick={DeselectPost} class="hug">Beamed World</h3>
     in
         <header>
             {containerWrap [ heading ]}
         </header>
 
 
-mainSection : Model -> Html a
+mainSection : Model -> Html Message
 mainSection model =
     let
         articles = List.map postSection model.posts
@@ -133,7 +154,7 @@ mainSection model =
             </div>
         </main'>
 
-postSection : Post -> Html a
+postSection : Post -> Html Message
 postSection post =
     <article>
         <h2>{= post.meta.title}</h2>
@@ -145,7 +166,7 @@ postSection post =
             {= post.meta.preview}
         </p>
         <br>
-        <a href="#">Read more</a>
+        <a href="#" onClick={SelectPost post}>Read more</a>
     </article>
 
 

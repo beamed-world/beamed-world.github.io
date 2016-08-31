@@ -2,6 +2,7 @@ module Main exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Html.Events
 import Html.App
 import Http
 import Markdown
@@ -36,6 +37,8 @@ type alias Model =
 
 type Message
     = NoOp
+    | DeselectPost
+    | SelectPost Post
     | SetPosts (Posts)
 
 
@@ -84,31 +87,49 @@ update message model = -- (model, Cmd.none)
         SetPosts posts ->
             ( { model | posts = posts }, Cmd.none)
 
+        SelectPost post ->
+            ( { model | selectedPost = Just post }, Cmd.none)
+
+        DeselectPost ->
+            ( { model | selectedPost = Nothing }, Cmd.none)
+
         NoOp ->
             (model, Cmd.none)
 
 
-view : Model -> Html message
+view : Model -> Html Message
 view model =
-    div []
-        [ headerSection
-        , mainSection model
-        , Html.div [Html.Attributes.attribute "class" "break"] []
-        , footerSection ]
+    let
+        index model =
+            div []
+                [ headerSection
+                , mainSection model
+                , Html.div [Html.Attributes.attribute "class" "break"] []
+                , footerSection ]
+        article post =
+            div []
+                [ headerSection
+                , containerWrap [(Markdown.toHtml [] post.content)]
+                , footerSection ]
 
+    in
+        case model.selectedPost of
+            Nothing -> index model
 
-headerSection : Html a
+            Just post -> article post
+
+headerSection : Html Message
 headerSection =
     let
         heading =
-            Html.h3 [Html.Attributes.attribute "class" "hug"] [Html.text "Beamed World"]
+            Html.h3 [Html.Events.onClick (DeselectPost), Html.Attributes.attribute "class" "hug"] [Html.text "Beamed World"]
     in
         Html.header [] [
             containerWrap [ heading ]
         ]
 
 
-mainSection : Model -> Html a
+mainSection : Model -> Html Message
 mainSection model =
     let
         articles = List.map postSection model.posts
@@ -133,7 +154,7 @@ mainSection model =
             ]
         ]
 
-postSection : Post -> Html a
+postSection : Post -> Html Message
 postSection post =
     Html.article [] [
         Html.h2 [] [Html.text  post.meta.title]
@@ -145,7 +166,7 @@ postSection post =
             Html.text  post.meta.preview
         ]
         , Html.br [] []
-        , Html.a [Html.Attributes.attribute "href" "#"] [Html.text "Read more"]
+        , Html.a [Html.Attributes.attribute "href" "#", Html.Events.onClick (SelectPost post)] [Html.text "Read more"]
     ]
 
 

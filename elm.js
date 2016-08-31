@@ -8245,6 +8245,107 @@ var _elm_lang$html$Html_Attributes$classList = function (list) {
 };
 var _elm_lang$html$Html_Attributes$style = _elm_lang$virtual_dom$VirtualDom$style;
 
+var _elm_lang$html$Html_Events$keyCode = A2(_elm_lang$core$Json_Decode_ops[':='], 'keyCode', _elm_lang$core$Json_Decode$int);
+var _elm_lang$html$Html_Events$targetChecked = A2(
+	_elm_lang$core$Json_Decode$at,
+	_elm_lang$core$Native_List.fromArray(
+		['target', 'checked']),
+	_elm_lang$core$Json_Decode$bool);
+var _elm_lang$html$Html_Events$targetValue = A2(
+	_elm_lang$core$Json_Decode$at,
+	_elm_lang$core$Native_List.fromArray(
+		['target', 'value']),
+	_elm_lang$core$Json_Decode$string);
+var _elm_lang$html$Html_Events$defaultOptions = _elm_lang$virtual_dom$VirtualDom$defaultOptions;
+var _elm_lang$html$Html_Events$onWithOptions = _elm_lang$virtual_dom$VirtualDom$onWithOptions;
+var _elm_lang$html$Html_Events$on = _elm_lang$virtual_dom$VirtualDom$on;
+var _elm_lang$html$Html_Events$onFocus = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'focus',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onBlur = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'blur',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onSubmitOptions = _elm_lang$core$Native_Utils.update(
+	_elm_lang$html$Html_Events$defaultOptions,
+	{preventDefault: true});
+var _elm_lang$html$Html_Events$onSubmit = function (msg) {
+	return A3(
+		_elm_lang$html$Html_Events$onWithOptions,
+		'submit',
+		_elm_lang$html$Html_Events$onSubmitOptions,
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onCheck = function (tagger) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'change',
+		A2(_elm_lang$core$Json_Decode$map, tagger, _elm_lang$html$Html_Events$targetChecked));
+};
+var _elm_lang$html$Html_Events$onInput = function (tagger) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'input',
+		A2(_elm_lang$core$Json_Decode$map, tagger, _elm_lang$html$Html_Events$targetValue));
+};
+var _elm_lang$html$Html_Events$onMouseOut = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseout',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseOver = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseover',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseLeave = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseleave',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseEnter = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseenter',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseUp = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseup',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseDown = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mousedown',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onDoubleClick = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'dblclick',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onClick = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'click',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$Options = F2(
+	function (a, b) {
+		return {stopPropagation: a, preventDefault: b};
+	});
+
 //import Dict, List, Maybe, Native.Scheduler //
 
 var _evancz$elm_http$Native_Http = function() {
@@ -8861,6 +8962,86 @@ var _user$project$Main$footerSection = A2(
 						]))
 				]))
 		]));
+var _user$project$Main$update = F2(
+	function (message, model) {
+		var _p0 = message;
+		switch (_p0.ctor) {
+			case 'SetPosts':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{posts: _p0._0}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'SelectPost':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							selectedPost: _elm_lang$core$Maybe$Just(_p0._0)
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'DeselectPost':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{selectedPost: _elm_lang$core$Maybe$Nothing}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			default:
+				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+		}
+	});
+var _user$project$Main$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$none;
+};
+var _user$project$Main$Data = function (a) {
+	return {posts: a};
+};
+var _user$project$Main$Post = F2(
+	function (a, b) {
+		return {meta: a, content: b};
+	});
+var _user$project$Main$Meta = F4(
+	function (a, b, c, d) {
+		return {title: a, date: b, byline: c, preview: d};
+	});
+var _user$project$Main$dataDecoder = A2(
+	_elm_lang$core$Json_Decode$object1,
+	_elm_lang$core$Basics$identity,
+	A2(
+		_elm_lang$core$Json_Decode_ops[':='],
+		'posts',
+		_elm_lang$core$Json_Decode$list(
+			A3(
+				_elm_lang$core$Json_Decode$object2,
+				_user$project$Main$Post,
+				A2(
+					_elm_lang$core$Json_Decode_ops[':='],
+					'meta',
+					A5(
+						_elm_lang$core$Json_Decode$object4,
+						_user$project$Main$Meta,
+						A2(_elm_lang$core$Json_Decode_ops[':='], 'title', _elm_lang$core$Json_Decode$string),
+						A2(_elm_lang$core$Json_Decode_ops[':='], 'date', _elm_lang$core$Json_Decode$string),
+						A2(_elm_lang$core$Json_Decode_ops[':='], 'byline', _elm_lang$core$Json_Decode$string),
+						A2(_elm_lang$core$Json_Decode_ops[':='], 'preview', _elm_lang$core$Json_Decode$string))),
+				A2(_elm_lang$core$Json_Decode_ops[':='], 'content', _elm_lang$core$Json_Decode$string)))));
+var _user$project$Main$getData = A2(_evancz$elm_http$Http$get, _user$project$Main$dataDecoder, '/data.json');
+var _user$project$Main$Model = F2(
+	function (a, b) {
+		return {posts: a, selectedPost: b};
+	});
+var _user$project$Main$SetPosts = function (a) {
+	return {ctor: 'SetPosts', _0: a};
+};
+var _user$project$Main$SelectPost = function (a) {
+	return {ctor: 'SelectPost', _0: a};
+};
 var _user$project$Main$postSection = function (post) {
 	return A2(
 		_elm_lang$html$Html$article,
@@ -8910,7 +9091,9 @@ var _user$project$Main$postSection = function (post) {
 				_elm_lang$html$Html$a,
 				_elm_lang$core$Native_List.fromArray(
 					[
-						A2(_elm_lang$html$Html_Attributes$attribute, 'href', '#')
+						A2(_elm_lang$html$Html_Attributes$attribute, 'href', '#'),
+						_elm_lang$html$Html_Events$onClick(
+						_user$project$Main$SelectPost(post))
 					]),
 				_elm_lang$core$Native_List.fromArray(
 					[
@@ -9007,11 +9190,13 @@ var _user$project$Main$mainSection = function (model) {
 					]))
 			]));
 };
+var _user$project$Main$DeselectPost = {ctor: 'DeselectPost'};
 var _user$project$Main$headerSection = function () {
 	var heading = A2(
 		_elm_lang$html$Html$h3,
 		_elm_lang$core$Native_List.fromArray(
 			[
+				_elm_lang$html$Html_Events$onClick(_user$project$Main$DeselectPost),
 				A2(_elm_lang$html$Html_Attributes$attribute, 'class', 'hug')
 			]),
 		_elm_lang$core$Native_List.fromArray(
@@ -9030,82 +9215,52 @@ var _user$project$Main$headerSection = function () {
 			]));
 }();
 var _user$project$Main$view = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		_elm_lang$core$Native_List.fromArray(
-			[]),
-		_elm_lang$core$Native_List.fromArray(
-			[
-				_user$project$Main$headerSection,
-				_user$project$Main$mainSection(model),
-				A2(
-				_elm_lang$html$Html$div,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						A2(_elm_lang$html$Html_Attributes$attribute, 'class', 'break')
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[])),
-				_user$project$Main$footerSection
-			]));
-};
-var _user$project$Main$update = F2(
-	function (message, model) {
-		var _p0 = message;
-		if (_p0.ctor === 'SetPosts') {
-			return {
-				ctor: '_Tuple2',
-				_0: _elm_lang$core$Native_Utils.update(
-					model,
-					{posts: _p0._0}),
-				_1: _elm_lang$core$Platform_Cmd$none
-			};
-		} else {
-			return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
-		}
-	});
-var _user$project$Main$subscriptions = function (model) {
-	return _elm_lang$core$Platform_Sub$none;
-};
-var _user$project$Main$Data = function (a) {
-	return {posts: a};
-};
-var _user$project$Main$Post = F2(
-	function (a, b) {
-		return {meta: a, content: b};
-	});
-var _user$project$Main$Meta = F4(
-	function (a, b, c, d) {
-		return {title: a, date: b, byline: c, preview: d};
-	});
-var _user$project$Main$dataDecoder = A2(
-	_elm_lang$core$Json_Decode$object1,
-	_elm_lang$core$Basics$identity,
-	A2(
-		_elm_lang$core$Json_Decode_ops[':='],
-		'posts',
-		_elm_lang$core$Json_Decode$list(
-			A3(
-				_elm_lang$core$Json_Decode$object2,
-				_user$project$Main$Post,
-				A2(
-					_elm_lang$core$Json_Decode_ops[':='],
-					'meta',
-					A5(
-						_elm_lang$core$Json_Decode$object4,
-						_user$project$Main$Meta,
-						A2(_elm_lang$core$Json_Decode_ops[':='], 'title', _elm_lang$core$Json_Decode$string),
-						A2(_elm_lang$core$Json_Decode_ops[':='], 'date', _elm_lang$core$Json_Decode$string),
-						A2(_elm_lang$core$Json_Decode_ops[':='], 'byline', _elm_lang$core$Json_Decode$string),
-						A2(_elm_lang$core$Json_Decode_ops[':='], 'preview', _elm_lang$core$Json_Decode$string))),
-				A2(_elm_lang$core$Json_Decode_ops[':='], 'content', _elm_lang$core$Json_Decode$string)))));
-var _user$project$Main$getData = A2(_evancz$elm_http$Http$get, _user$project$Main$dataDecoder, '/data.json');
-var _user$project$Main$Model = F2(
-	function (a, b) {
-		return {posts: a, selectedPost: b};
-	});
-var _user$project$Main$SetPosts = function (a) {
-	return {ctor: 'SetPosts', _0: a};
+	var article = function (post) {
+		return A2(
+			_elm_lang$html$Html$div,
+			_elm_lang$core$Native_List.fromArray(
+				[]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_user$project$Main$headerSection,
+					_user$project$Main$containerWrap(
+					_elm_lang$core$Native_List.fromArray(
+						[
+							A2(
+							_evancz$elm_markdown$Markdown$toHtml,
+							_elm_lang$core$Native_List.fromArray(
+								[]),
+							post.content)
+						])),
+					_user$project$Main$footerSection
+				]));
+	};
+	var index = function (model) {
+		return A2(
+			_elm_lang$html$Html$div,
+			_elm_lang$core$Native_List.fromArray(
+				[]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_user$project$Main$headerSection,
+					_user$project$Main$mainSection(model),
+					A2(
+					_elm_lang$html$Html$div,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							A2(_elm_lang$html$Html_Attributes$attribute, 'class', 'break')
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[])),
+					_user$project$Main$footerSection
+				]));
+	};
+	var _p1 = model.selectedPost;
+	if (_p1.ctor === 'Nothing') {
+		return index(model);
+	} else {
+		return article(_p1._0);
+	}
 };
 var _user$project$Main$NoOp = {ctor: 'NoOp'};
 var _user$project$Main$init = {
