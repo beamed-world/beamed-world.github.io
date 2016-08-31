@@ -104,7 +104,6 @@ view model =
             div []
                 [ headerSection
                 , mainSection model
-                , Html.div [Html.Attributes.attribute "class" "break"] []
                 , footerSection ]
         article post =
             div []

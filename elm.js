@@ -9244,14 +9244,6 @@ var _user$project$Main$view = function (model) {
 				[
 					_user$project$Main$headerSection,
 					_user$project$Main$mainSection(model),
-					A2(
-					_elm_lang$html$Html$div,
-					_elm_lang$core$Native_List.fromArray(
-						[
-							A2(_elm_lang$html$Html_Attributes$attribute, 'class', 'break')
-						]),
-					_elm_lang$core$Native_List.fromArray(
-						[])),
 					_user$project$Main$footerSection
 				]));
 	};

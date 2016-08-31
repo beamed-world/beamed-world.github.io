@@ -104,7 +104,6 @@ view model =
             div []
                 [ headerSection
                 , mainSection model
-                , <div class="break"></div>
                 , footerSection ]
         article post =
             div []

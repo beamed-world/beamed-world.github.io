@@ -24,6 +24,10 @@ footer, header {
   color: #eee;
 }
 
+footer {
+  margin-top: 5rem;
+}
+
 header {
   /*padding-bottom: 25vh;
   margin-bottom: -25vh;*/
@@ -39,6 +43,7 @@ header h3 {
 
 main .main {
   background-color: #eee;
+  min-height: 100vh;
 }
 
 img {
