@@ -9,15 +9,81 @@
   <link href="assets/normalize.css/normalize.css" rel="stylesheet">
   <link href="assets/typebase.css/typebase.css" rel="stylesheet">
   <link href="assets/flexboxgrid/dist/flexboxgrid.min.css" rel="stylesheet">
-  <link href="style.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: monospace;
+      color: #111;
+      background-color: #eee;
+    }
+
+    pre {
+      color: #eee;
+      background-color: #111;
+      padding: 1rem;
+      overflow-y: scroll;
+    }
+
+    a {
+      color: #111;
+    }
+
+    .break {
+      height: 5rem;
+    }
+
+    footer, header {
+      background: #111;
+      color: #eee;
+    }
+
+    footer {
+      margin-top: 5rem;
+    }
+
+    header {
+      /*padding-bottom: 25vh;
+      margin-bottom: -25vh;*/
+      background: #111;
+      padding: 0.5rem 0 0.5rem 0;
+      /*text-align: center;*/
+      /*height: 100vh;*/
+    }
+
+    header h3 {
+      font-weight: 200;
+    }
+
+    main .main {
+      background-color: #eee;
+      min-height: 100vh;
+    }
+
+    img {
+      display: block;
+    }
+
+    @media only screen and (max-width: 75em) {
+
+    }
+    @media only screen and (max-width: 62em) {
+      html {
+        font-size: 110%;
+      }
+    }
+    @media only screen and (max-width: 48em) {
+      
+      html {
+        font-size: 100%;
+      }
+
+    }
+  </style>
 </head>
 
 <body>
 
 
   <div id="elm-node"></div>
-
-  <!--<script src="assets/patterns/index.js"></script>-->
 
   <script src="elm.js"></script>
   <script>
@@ -50,14 +116,6 @@
 
   </script>
   <script src="https://code.jquery.com/jquery-3.1.0.slim.min.js" integrity="sha256-cRpWjoSOw5KcyIOaZNo4i6fZ9tKPhYYb6i5T9RSVJG8=" crossorigin="anonymous"></script>
-  <script src="assets/flowtype.js"></script>
-  <script>
-    // $('body').flowtype({
-    //   minFont : 12,
-    //   maxFont : 40,
-    //   fontRatio
-    // })
-  </script>
 
 </body>
 

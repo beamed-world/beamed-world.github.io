@@ -35,10 +35,21 @@ walker.on('end', () => {
   const elmInputFile = join(__dirname, 'source/Main.elm')
   const elmOutputFile = join(__dirname, 'elm.js')
 
+  const webGLIn = join(__dirname, 'source/WebGLExperiments.elm')
+  const webGLOut = join(__dirname, 'webgl.html')
+
   elmMake(elmInputFile, elmOutputFile)
+  elmMake(webGLIn, webGLOut)
 
 })
 
+/**
+ * Makes an elm input file
+ * 
+ * @export
+ * @param {string} inputFile
+ * @param {string} outputFile
+ */
 export function elmMake(inputFile: string, outputFile: string): void {
 
   const argvCopy = [...process.argv]

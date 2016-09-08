@@ -12,6 +12,8 @@ Elm, do some reading first, because Elmx targets an edge case, and knowing the
 mapping between a conventional Elm virtual DOM call and one set up with Elmx is
 critical.
 
+<img src="assets/road.jpg" alt="alt text" width="100%" height="100%" title="Logo Title Text 1">
+
 Elmx is to Elm as JSX is to Javascript, and TSX is to TypeScript. If you are the
 type of person who groks things with code, here is a sample to get you started.
 

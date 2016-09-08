@@ -10,9 +10,7 @@ import Task
 import Json.Decode as Json exposing ((:=))
 import Debug
 import Markdown
-
-type alias Data =
-    { posts : Posts }
+import WebGLExperiments
 
 type alias Posts = List (Post)
 
@@ -43,7 +41,8 @@ type Message
 
 
 main : Program Never
-main = Html.App.program
+main = WebGLExperiments.main
+main_ = Html.App.program
     { init = init
     , update = update
     , subscriptions = subscriptions
@@ -202,3 +201,25 @@ containerWrap children =
 containerClass : String
 containerClass =
     "col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3"
+
+
+greetings : List (String)
+greetings =
+    [ "Hello"
+    , "Hey"
+    , "Sup"
+    , "Welcome"
+    , "Greetings"
+    , "Hi"
+    , "G'day"
+    ]
+
+
+leads : List (String)
+leads = 
+    [ "Some catchy and enthusiastic line here"
+    , "Remember, no matter where you go, there you are"
+    , "This is lead text, hopefully it says something interesting"
+    , "All of this is random. Really"
+    , "I can't believe people make these things static, such useful realestate"
+    ]
